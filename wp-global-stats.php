@@ -65,9 +65,12 @@ function wordpress_stats_download() {
  */
 add_shortcode( 'wordpress-stats', 'wordpress_stats_show' );
 function wordpress_stats_show() {
-
-  // Download stats
-  $stats = wordpress_stats_download();
+  
+  if ( false === ( $stats = get_transient( 'wordpress_stats_array' ) ) ) {
+    // It wasn't there, so regenerate the data and save the transient
+    $stats = wordpress_stats_download();
+    set_transient( 'wordpress_stats_array', $stats, 12 * HOUR_IN_SECONDS );
+  }
 
   // Show stats
   wordpress_stats_print_table($stats);

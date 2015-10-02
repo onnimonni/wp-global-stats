@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Wp-global-stats
-Version: 1.0
+Version: 0.1-alpha
 Description: Shortcode to show worldwide WP versions statistics
 Author: Onni Hakala / Seravo Oy
 Author URI: http://github.com/onnimonni
@@ -62,6 +62,7 @@ function wordpress_stats_download() {
 
 /**
  * Adds shortcode: [wordpress-stats]
+ * - This 
  */
 add_shortcode( 'wordpress-stats', 'wordpress_stats_show' );
 function wordpress_stats_show() {
@@ -70,5 +71,59 @@ function wordpress_stats_show() {
   $stats = wordpress_stats_download();
 
   // Show stats
+  wordpress_stats_print_table($stats);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#############
+# VERSION 2 #
+#############
+
+/**
+ * Adds shortcode: [wordpress-stats-cached]
+ *
+ * - This one uses transients
+ *
+ * @link https://codex.wordpress.org/Transients_API
+ */
+add_shortcode( 'wordpress-stats-cached', 'wordpress_stats_show_cached' );
+function wordpress_stats_show_cached() {
+
+  if ( false === ( $stats = get_transient( 'wordpress_stats_array' ) ) ) {
+
+    // It wasn't there, so regenerate the data and save the transient
+    $stats = wordpress_stats_download();  
+    set_transient( 'wordpress_stats_array', $stats, 24 * HOUR_IN_SECONDS );
+  }
   wordpress_stats_print_table($stats);
 }

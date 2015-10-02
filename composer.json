@@ -1,0 +1,17 @@
+{
+  "name": "onnimonni/wp-global-stats",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "description": "Wordpress Shortcode to show worldwide WP versions statistics",
+  "homepage": "http://seravo.fi",
+  "authors": [
+    {
+      "name": "Onni Hakala",
+      "email": "onni@seravo.fi",
+      "homepage": "https://github.com/onnimonni"
+    }
+  ],
+  "keywords": [
+    "wordpress", "wordpress.org", "wp", "shortcode", "global", "statistics"
+  ]
+}
